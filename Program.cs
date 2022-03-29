@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using NGASPNETCORE.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
 
 var app = builder.Build();
 
